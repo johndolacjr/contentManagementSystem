@@ -5,7 +5,7 @@
  * 1. Correct the line height in all browsers.
  * 2. Prevent adjustments of font size after orientation changes in iOS.
  */
-html {
+ html {
   line-height: 1.15;
   /* 1 */
   -webkit-text-size-adjust: 100%;
@@ -372,7 +372,7 @@ h6 {
 }
 
 h1 {
-  font-size: 2.25rem;
+  font-size: 1rem;
 }
 
 h2 {
@@ -929,7 +929,7 @@ a:hover {
 }
 
 .bg-light {
-  background-color: #d9e9e8 !important;
+  background-color: #340edf !important;
 }
 
 .bg-dark {
@@ -972,7 +972,7 @@ a:hover {
 .btn {
   text-align: center;
   display: inline-block;
-  padding: 0.5rem 1.2rem;
+  padding: 0.5rem 1.0rem;
   margin: 0;
   text-decoration: none;
   font-size: 1rem;
@@ -993,7 +993,7 @@ a:hover {
 }
 
 .btn.btn-sm {
-  font-size: 0.85rem;
+  font-size: .90rem;
   padding: 0.3rem 0.9rem;
 }
 
@@ -1017,6 +1017,10 @@ a:hover {
   background-color: #57779a;
 }
 
+.btn.btn-danger {
+  background-color: #e64c66;
+  color: #ffffff;
+}
 .btn.btn-danger {
   background-color: #e64c66;
   color: #ffffff;

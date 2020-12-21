@@ -5,10 +5,10 @@ const newFormHandler = async (event) => {
   const needed_funding = document.querySelector('#project-funding').value.trim();
   const description = document.querySelector('#project-desc').value.trim();
 
-  if (name && needed_funding && description) {
+  if (name && description) {
     const response = await fetch(`/api/projects`, {
       method: 'POST',
-      body: JSON.stringify({ name, needed_funding, description }),
+      body: JSON.stringify({ name, description }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -17,6 +17,7 @@ const newFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
+      console.log("I broke"), 
       alert('Failed to create project');
     }
   }
@@ -33,10 +34,26 @@ const delButtonHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to delete project');
+      alert('Failed to delete comment');
     }
   }
 };
+
+// const updateButtonHandler = async (event) => {
+//   if (event.target.hasAttribute('data-id')) {
+//     const id = event.target.getAttribute('project-desc');
+
+//     const response = await fetch(`/api/projects/${id}`, {
+//       method: 'UPDATE',
+//     });
+
+//     if (response.ok) {
+//       document.location.replace('/project-desc');
+//     } else {
+//       alert('Failed to update comment');
+//     }
+//   }
+// };
 
 document
   .querySelector('.new-project-form')
@@ -45,3 +62,7 @@ document
 document
   .querySelector('.project-list')
   .addEventListener('click', delButtonHandler);
+
+// document
+//   .querySelector('.new-project-form')
+//   .addEventListener('click', updateButtonHandler);
