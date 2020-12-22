@@ -1,9 +1,14 @@
+let name; 
+let needed_funding;
+let description;
+let id;
+
 const newFormHandler = async (event) => {
   event.preventDefault();
 
-  const name = document.querySelector('#project-name').value.trim();
-  const needed_funding = document.querySelector('#project-funding').value.trim();
-  const description = document.querySelector('#project-desc').value.trim();
+  name = document.querySelector('#project-name').value.trim();
+  needed_funding = document.querySelector('#project-funding').value.trim();
+  description = document.querySelector('#project-desc').value.trim();
 
   if (name && needed_funding && description) {
     const response = await fetch(`/api/projects`, {
@@ -17,7 +22,7 @@ const newFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to create comment');
+      alert('Create comment failed, it did');
     }
   }
 };
@@ -33,9 +38,61 @@ const delButtonHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      alert('Failed to delete comment');
+      alert('Delete comment failed, it did');
     }
   }
+};
+
+const submitUpdateHandler = async (event) => {
+  event.preventDefault();
+
+  name = document.querySelector('#project-name').value.trim();
+  needed_funding = document.querySelector('#project-funding').value.trim();
+  description = document.querySelector('#project-desc').value.trim();
+
+  if (name && needed_funding && description) {
+    const response = await fetch(`/api/projects/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify({ name, needed_funding, description }),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (response.ok) {
+      document.location.replace('/profile');
+    } else {
+      alert('Update comment failed, it did');
+    }
+  }
+};
+
+
+
+
+// Need to figure out why the fetch isnt working. 
+
+
+
+
+
+
+
+
+const getUpdateValues = async (event) => {
+  id = event.target.getAttribute('data-id');
+  const response = await fetch(`/api/projects/${id}`, {
+    method: 'GET',
+    body: JSON.stringify({ name, needed_funding, description }),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  });
+    if (response.ok) {
+      name.value=response.name,
+      needed_funding.value=response.needed_funding,
+      description.value=response.description
+    };
 };
 
 document
@@ -43,5 +100,9 @@ document
   .addEventListener('submit', newFormHandler);
 
 document
-  .querySelector('.project-list')
+  .querySelector('#delete')
   .addEventListener('click', delButtonHandler);
+
+document
+  .querySelector('#update')
+  .addEventListener('click', getUpdateValues);

@@ -25,6 +25,9 @@
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
+            <div class="form-group">
+        <button type="submit" id="main_update" class="btn btn-primary">Update</button>
+      </div>
     </form>
   </div>
 <br>
@@ -33,7 +36,7 @@
 
   {{#if projects.length}}
   <div class="col-md-12 project-list">
-    <h3>My Comments:</h3>
+    <h3>Manage My Topics:</h3>
 
     {{#each projects as |project|}}
     <div class="row mb-6">
@@ -42,8 +45,8 @@
         <p>{{description}}</p>
       </div>
       <div class="col-md-6">
-         <button class="btn btn-sm btn-info" data-id="{{project.id}}"> Update </button> 
-        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">Remove</button>
+         <button class="btn btn-sm btn-info" id="update" data-id="{{project.id}}"> Update </button> 
+        <button class="btn btn-sm btn-danger" id = "delete" data-id="{{project.id}}">Remove</button>
       </div>
     </div>
     {{/each}}
