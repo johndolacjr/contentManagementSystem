@@ -5,10 +5,10 @@ const newFormHandler = async (event) => {
   const needed_funding = document.querySelector('#project-funding').value.trim();
   const description = document.querySelector('#project-desc').value.trim();
 
-  if (name && description) {
+  if (name && needed_funding && description) {
     const response = await fetch(`/api/projects`, {
       method: 'POST',
-      body: JSON.stringify({ name, description }),
+      body: JSON.stringify({ name, needed_funding, description }),
       headers: {
         'Content-Type': 'application/json',
       },
@@ -17,8 +17,7 @@ const newFormHandler = async (event) => {
     if (response.ok) {
       document.location.replace('/profile');
     } else {
-      console.log("I broke"), 
-      alert('Failed to create project');
+      alert('Failed to create comment');
     }
   }
 };
@@ -39,22 +38,6 @@ const delButtonHandler = async (event) => {
   }
 };
 
-// const updateButtonHandler = async (event) => {
-//   if (event.target.hasAttribute('data-id')) {
-//     const id = event.target.getAttribute('project-desc');
-
-//     const response = await fetch(`/api/projects/${id}`, {
-//       method: 'UPDATE',
-//     });
-
-//     if (response.ok) {
-//       document.location.replace('/project-desc');
-//     } else {
-//       alert('Failed to update comment');
-//     }
-//   }
-// };
-
 document
   .querySelector('.new-project-form')
   .addEventListener('submit', newFormHandler);
@@ -62,7 +45,3 @@ document
 document
   .querySelector('.project-list')
   .addEventListener('click', delButtonHandler);
-
-// document
-//   .querySelector('.new-project-form')
-//   .addEventListener('click', updateButtonHandler);
