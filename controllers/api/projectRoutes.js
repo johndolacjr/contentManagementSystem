@@ -15,6 +15,24 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
+router.get('/:id', withAuth, async (req, res) => {
+  try {
+    const postedData = await Project.find({
+      where: {
+        id: req.params.id,
+      user_id: req.session.user_id
+    }
+    });
+    if (!postedData) {
+      res.status(404).json({ message: 'No comment found!' });
+      return;
+    };
+    res.status(200).json(postedData);
+    } catch (err) {
+    res.status(500).json(err);
+    }
+});
+
 router.delete('/:id', withAuth, async (req, res) => {
   try {
     const projectData = await Project.destroy({
@@ -34,5 +52,30 @@ router.delete('/:id', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+// 
+router.put('/:id', withAuth, async (req, res) => {
+  try {
+    const projectData = await Project.find({
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      }, 
+      
+    }, req.body
+    
+    );
+
+    if (!projectData) {
+      res.status(404).json({ message: 'No comment found!' });
+      return;
+    }
+
+    res.status(200).json(projectData);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
+
 
 module.exports = router;
